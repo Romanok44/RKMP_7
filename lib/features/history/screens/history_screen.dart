@@ -113,18 +113,7 @@ class HistoryScreen extends StatelessWidget {
     final groupedPolls = _groupPollsByCategory(completedPolls);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('История опросов'),
-        backgroundColor: Colors.blue[700],
-        actions: [
-          if (completedPolls.isNotEmpty)
-            IconButton(
-              icon: const Icon(Icons.delete),
-              onPressed: () => _showClearConfirmationDialog(context, historyService),
-              tooltip: 'Очистить историю',
-            ),
-        ],
-      ),
+      // AppBar теперь будет добавляться в MainNavigationScreen
       body: completedPolls.isEmpty
           ? const EmptyHistoryState()
           : ListView(

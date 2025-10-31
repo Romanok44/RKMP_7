@@ -7,10 +7,7 @@ class CategorySelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Выберите категорию'),
-        backgroundColor: Colors.blue[700],
-      ),
+      // AppBar теперь будет добавляться в MainNavigationScreen
       body: ListView(
         children: [
           _buildCategoryCard(
