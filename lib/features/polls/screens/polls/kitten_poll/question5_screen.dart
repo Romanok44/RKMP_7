@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../widgets/poll_question_screen.dart';
-import 'result_screen.dart';
 
 class Question5Screen extends StatelessWidget {
   final int score;
   const Question5Screen({super.key, required this.score});
 
   void _navigateToNext(BuildContext context, int additionalScore) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => ResultScreen(
-          totalScore: score + additionalScore,
-          pollId: 'kitten_poll',
-          pollTitle: 'Какой ты сегодня котенок?',
-          pollCategory: 'Смешные опросы',
-        ),
-      ),
-    );
+    context.go('/kitten/result', extra: {
+      'score': score + additionalScore,
+      'pollId': 'kitten_poll',
+      'pollTitle': 'Какой ты сегодня котенок?',
+      'pollCategory': 'Смешные опросы',
+    });
   }
 
   @override

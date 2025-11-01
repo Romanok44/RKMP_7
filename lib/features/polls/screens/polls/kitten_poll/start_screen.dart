@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'question1_screen.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
 
   void _startQuiz(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const Question1Screen()),
-    );
+    context.go('/kitten/question1');
   }
 
   @override

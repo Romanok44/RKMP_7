@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import '../polls/kitten_poll/start_screen.dart' as kitten_poll;
-import '../polls/meme_test/start_screen.dart' as meme_test;
-import '../polls/personality_test/start_screen.dart' as personality_test;
-import '../polls/digital_habits/start_screen.dart' as digital_habits;
+import 'package:go_router/go_router.dart';
 
 class PollListScreen extends StatelessWidget {
   final String category;
@@ -15,12 +12,12 @@ class PollListScreen extends StatelessWidget {
           {
             'title': 'Какой ты сегодня котенок?',
             'description': 'Узнай, какой ты пушистик сегодня',
-            'screen': const kitten_poll.StartScreen(),
+            'route': '/kitten/start',
           },
           {
             'title': 'Тест на знание мемов',
             'description': 'Проверь, насколько ты в теме интернет-культуры',
-            'screen': const meme_test.MemeTestStartScreen(),
+            'route': '/meme/start',
           },
           {
             'title': 'Какой бутерброд определяет твою жизнь?',
@@ -30,37 +27,17 @@ class PollListScreen extends StatelessWidget {
             'title': 'Как хорошо ты знаешь аниме "Наруто"?',
             'description': 'Проверь свои знания о Наруто, Саске и Конохе',
           },
-          {
-            'title': 'Какой ты супергерой?',
-            'description': 'Определи свои суперспособности и стиль героизма',
-          },
-          {
-            'title': 'Сколько бы ты сумел выжить в постапокалиптическом мире?',
-            'description': 'Пройди тест и узнай, насколько ты подготовлен к зомби-апокалипсису',
-          },
         ];
       case 'personality':
         return [
           {
             'title': 'Тест на тип личности',
             'description': 'Узнай свой психологический тип',
-            'screen': const personality_test.PersonalityTestStartScreen(),
+            'route': '/personality/start',
           },
           {
             'title': 'Тест Майерс-Бриггс',
             'description': 'Определи свой тип личности из 16 возможных вариантов',
-          },
-          {
-            'title': 'Тест на профориентацию',
-            'description': 'Найди профессию, которая подходит именно тебе',
-          },
-          {
-            'title': 'Тест на эмоциональный интеллект',
-            'description': 'Оцени свою способность понимать и управлять эмоциями',
-          },
-          {
-            'title': 'Тест на уровень стресса',
-            'description': 'Узнай, насколько стресс влияет на твою жизнь',
           },
         ];
       case 'sociological':
@@ -68,27 +45,11 @@ class PollListScreen extends StatelessWidget {
           {
             'title': 'Опрос о цифровых привычках',
             'description': 'Исследование использования технологий',
-            'screen': const digital_habits.DigitalHabitsStartScreen(),
+            'route': '/digital/start',
           },
           {
             'title': 'Удовлетворенность смартфонами Apple',
             'description': 'Помоги улучшить продукты Apple, поделись своим опытом',
-          },
-          {
-            'title': 'Опрос о качестве обслуживания в магазине "Пятерочка"',
-            'description': 'Оцени уровень сервиса в популярной продуктовой сети',
-          },
-          {
-            'title': 'Исследование предпочтений в выборе досуга',
-            'description': 'Расскажи, как ты предпочитаешь проводить свободное время',
-          },
-          {
-            'title': 'Опрос о привычках потребления кофе',
-            'description': 'Исследуем кофейные традиции и предпочтения',
-          },
-          {
-            'title': 'Исследование о влиянии социальных сетей',
-            'description': 'Узнай, как соцсети влияют на твое настроение и поведение',
           },
         ];
       default:
@@ -119,11 +80,8 @@ class PollListScreen extends StatelessWidget {
               subtitle: Text(poll['description']),
               trailing: const Icon(Icons.arrow_forward_ios),
               onTap: () {
-                if (poll['screen'] != null) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => poll['screen']),
-                  );
+                if (poll['route'] != null) {
+                  context.go(poll['route']!);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Этот опрос находится в разработке')),

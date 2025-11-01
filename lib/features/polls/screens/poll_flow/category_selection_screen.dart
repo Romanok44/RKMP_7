@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'poll_list_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class CategorySelectionScreen extends StatelessWidget {
   const CategorySelectionScreen({super.key});
@@ -7,7 +7,10 @@ class CategorySelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // AppBar теперь будет добавляться в MainNavigationScreen
+      appBar: AppBar(
+        title: const Text('Выберите категорию'),
+        backgroundColor: Colors.blue[700],
+      ),
       body: ListView(
         children: [
           _buildCategoryCard(
@@ -47,12 +50,7 @@ class CategorySelectionScreen extends StatelessWidget {
         ),
         trailing: const Icon(Icons.arrow_forward_ios),
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => PollListScreen(category: category),
-            ),
-          );
+          context.go('/polls/$category');
         },
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../widgets/rating_review_screen.dart';
 
@@ -6,20 +7,15 @@ class MemeTestResultScreen extends StatelessWidget {
   const MemeTestResultScreen({super.key});
 
   void _navigateToRatingReview(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => RatingReviewScreen(
-          pollId: 'meme_test',
-          pollTitle: 'Тест на знание мемов',
-          pollCategory: 'Смешные опросы',
-          pollResult: 'Мем-гуру уровня 80',
-          onComplete: () {
-            Navigator.popUntil(context, (route) => route.isFirst);
-          },
-        ),
-      ),
-    );
+    context.go('/rating', extra: {
+      'pollId': 'meme_test',
+      'pollTitle': 'Тест на знание мемов',
+      'pollCategory': 'Смешные опросы',
+      'pollResult': 'Мем-гуру уровня 80',
+      'onComplete': () {
+        context.go('/');
+      },
+    });
   }
 
   @override
@@ -77,7 +73,7 @@ class MemeTestResultScreen extends StatelessWidget {
                 height: 50,
                 child: TextButton(
                   onPressed: () {
-                    Navigator.popUntil(context, (route) => route.isFirst);
+                    context.go('/');
                   },
                   child: const Text(
                     "Завершить без оценки",

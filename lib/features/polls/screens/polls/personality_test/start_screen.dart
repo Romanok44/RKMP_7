@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'result_screen.dart';
 
 class PersonalityTestStartScreen extends StatelessWidget {
   const PersonalityTestStartScreen({super.key});
 
   void _startTest(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const PersonalityTestResultScreen()),
-    );
+    context.go('/personality/result');
   }
 
   @override

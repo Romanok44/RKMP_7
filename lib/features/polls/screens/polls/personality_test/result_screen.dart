@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../widgets/rating_review_screen.dart';
 
@@ -6,20 +7,15 @@ class PersonalityTestResultScreen extends StatelessWidget {
   const PersonalityTestResultScreen({super.key});
 
   void _navigateToRatingReview(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => RatingReviewScreen(
-          pollId: 'personality_test',
-          pollTitle: 'Тест на тип личности',
-          pollCategory: 'Психологические опросы',
-          pollResult: 'INTJ - Стратег',
-          onComplete: () {
-            Navigator.popUntil(context, (route) => route.isFirst);
-          },
-        ),
-      ),
-    );
+    context.go('/rating', extra: {
+      'pollId': 'personality_test',
+      'pollTitle': 'Тест на тип личности',
+      'pollCategory': 'Психологические опросы',
+      'pollResult': 'INTJ - Стратег',
+      'onComplete': () {
+        context.go('/');
+      },
+    });
   }
 
   @override
@@ -77,7 +73,7 @@ class PersonalityTestResultScreen extends StatelessWidget {
                 height: 50,
                 child: TextButton(
                   onPressed: () {
-                    Navigator.popUntil(context, (route) => route.isFirst);
+                    context.go('/');
                   },
                   child: const Text(
                     "Завершить без оценки",

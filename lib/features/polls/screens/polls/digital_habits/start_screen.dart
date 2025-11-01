@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'result_screen.dart';
 
 class DigitalHabitsStartScreen extends StatelessWidget {
   const DigitalHabitsStartScreen({super.key});
 
   void _startTest(BuildContext context) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const DigitalHabitsResultScreen()),
-    );
+    context.go('/digital/result');
   }
 
   @override

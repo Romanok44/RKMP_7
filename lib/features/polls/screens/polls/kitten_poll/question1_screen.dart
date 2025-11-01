@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../widgets/poll_question_screen.dart';
-import 'question2_screen.dart';
 
 class Question1Screen extends StatelessWidget {
   const Question1Screen({super.key});
 
   void _navigateToNext(BuildContext context, int score) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => Question2Screen(score: score)),
-    );
+    context.go('/kitten/question2', extra: score);
   }
 
   @override

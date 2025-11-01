@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../widgets/rating_review_screen.dart';
 
@@ -57,20 +58,15 @@ class ResultScreen extends StatelessWidget {
   }
 
   void _navigateToRatingReview(BuildContext context, String resultText) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => RatingReviewScreen(
-          pollId: pollId,
-          pollTitle: pollTitle,
-          pollCategory: pollCategory,
-          pollResult: resultText,
-          onComplete: () {
-            Navigator.popUntil(context, (route) => route.isFirst);
-          },
-        ),
-      ),
-    );
+    context.go('/rating', extra: {
+      'pollId': pollId,
+      'pollTitle': pollTitle,
+      'pollCategory': pollCategory,
+      'pollResult': resultText,
+      'onComplete': () {
+        context.go('/');
+      },
+    });
   }
 
   @override
@@ -130,7 +126,7 @@ class ResultScreen extends StatelessWidget {
                 height: 50,
                 child: TextButton(
                   onPressed: () {
-                    Navigator.popUntil(context, (route) => route.isFirst);
+                    context.go('/');
                   },
                   child: const Text(
                     "Завершить без оценки",
